@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}À propos - Simple Flask App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="mb-4">À propos de l'application</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ app_info.name }}</h5>
+                <p class="card-text">{{ app_info.description }}</p>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Version:</strong>
+                        <span class="badge bg-primary">{{ app_info.version }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Framework:</strong>
+                        <span>Flask (Python)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Interface:</strong>
+                        <span>Bootstrap 5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Auteur:</strong>
+                        <span>{{ app_info.author }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Fonctionnalités incluses</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li>✅ Routing Flask</li>
+                        <li>✅ Templates Jinja2</li>
+                        <li>✅ Formulaires</li>
+                        <li>✅ API JSON</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li>✅ Gestion d'erreurs</li>
+                        <li>✅ Interface Bootstrap</li>
+                        <li>✅ Structure modulaire</li>
+                        <li>✅ Prêt pour production</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Retour à l'accueil</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">Nous contacter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

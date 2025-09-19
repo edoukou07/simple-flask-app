@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Erreur serveur - Simple Flask App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto text-center">
+        <h1 class="display-1 text-danger">500</h1>
+        <h2>Erreur interne du serveur</h2>
+        <p class="lead">Une erreur inattendue s'est produite sur le serveur.</p>
+        
+        <div class="mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Retour à l'accueil</a>
+            <button onclick="location.reload()" class="btn btn-outline-primary">Actualiser</button>
+        </div>
+
+        <div class="mt-4">
+            <p class="text-muted">
+                Si le problème persiste, 
+                <a href="{{ url_for('contact') }}">contactez-nous</a>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

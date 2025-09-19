@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Simple Flask App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 text-primary">Bienvenue !</h1>
+        <p class="lead">Voici votre application Flask simple et fonctionnelle</p>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Informations</h5>
+                <p class="card-text">
+                    <strong>Heure actuelle :</strong> {{ current_time }}
+                </p>
+                <p class="card-text">
+                    Cette application démontre les fonctionnalités de base de Flask.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ url_for('about') }}" class="btn btn-primary me-2">En savoir plus</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-primary me-2">Nous contacter</a>
+            <a href="{{ url_for('api_time') }}" class="btn btn-outline-secondary" target="_blank">API Time</a>
+        </div>
+
+        <div class="mt-4">
+            <h5>Fonctionnalités disponibles :</h5>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">🏠 Pages Web</h6>
+                            <p class="card-text">Navigation entre différentes pages</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">📝 Formulaires</h6>
+                            <p class="card-text">Traitement des données utilisateur</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">🔧 API REST</h6>
+                            <p class="card-text">Endpoints JSON pour intégrations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

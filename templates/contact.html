@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Simple Flask App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="mb-4">Contactez-nous</h1>
+        
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+            <strong>Merci {{ name }} !</strong> Votre message a été reçu avec succès.
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom complet</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Adresse email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Envoyer le message</button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Annuler</a>
+        </form>
+
+        <div class="mt-4">
+            <h5>Autres moyens de nous joindre</h5>
+            <p class="text-muted">
+                📧 Email: contact@example.com<br>
+                📞 Téléphone: +33 1 23 45 67 89<br>
+                📍 Adresse: 123 Rue de l'Example, Paris, France
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
