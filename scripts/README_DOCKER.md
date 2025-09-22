@@ -145,7 +145,7 @@ az group create --name simple-flask-rg --location francecentral
 az container create `
   --resource-group simple-flask-rg `
   --name simple-flask-app `
-  --image simple-flask-app:prod `
+  --image simple-flask-app:dev `
   --dns-name-label simple-flask-unique-name `
   --ports 5000 `
   --cpu 1 `
@@ -175,6 +175,9 @@ az container create `
   --registry-login-server myflaskregistry.azurecr.io `
   --registry-username myflaskregistry `
   --registry-password $(az acr credential show --name myflaskregistry --query passwords[0].value --output tsv) `
+  --os-type linux `
+  --cpu 2 `
+  --memory 4 `
   --dns-name-label simple-flask-unique-name `
   --ports 5000
 ```
