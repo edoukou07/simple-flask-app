@@ -1,0 +1,49 @@
+# Dockerfile optimisé pour la production avec Gunicorn
+FROM python:3.11-slim
+
+# Variables d'environnement pour optimiser Python dans un conteneur
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Créer un utilisateur non-root pour la sécurité
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers de dépendances en premier pour optimiser le cache Docker
+COPY requirements.txt .
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier le code de l'application
+COPY . .
+
+# Changer le propriétaire des fichiers vers l'utilisateur non-root
+RUN chown -R appuser:appuser /app
+
+# Basculer vers l'utilisateur non-root
+USER appuser
+
+# Port sur lequel l'application écoute
+EXPOSE 5000
+
+# Variables d'environnement pour Flask en production
+ENV FLASK_APP=app.py \
+    FLASK_ENV=production \
+    PYTHONPATH=/app
+
+# Commande de santé pour vérifier le statut du conteneur
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Commande par défaut pour démarrer l'application avec Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "app:app"]
